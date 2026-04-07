@@ -194,8 +194,6 @@
             .calc-result { grid-template-columns: 1fr 1fr; }
         }
 
-        /* Consent Banner */
-        #consent-banner { position: fixed; bottom: 20px; left: 20px; right: 20px; max-width: 500px; background: white; padding: 25px; border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.3); z-index: 10001; display: none; }
     </style>
 </head>
 <body>
@@ -383,11 +381,7 @@
         </div>
         <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; text-align: center; color: white; font-size: 0.95rem;">
             <p style="opacity: 0.9;">&copy; 2026 Skylight Solar & Water Purifier. All rights reserved.</p>
-            <p style="margin-top: 15px; font-weight: 600;">
-                Built by <a href="/" style="color: var(--accent); text-decoration: underline;">Skylight Solar</a> 
-                <span style="margin: 0 10px; opacity: 0.3;">|</span> 
-                <a href="/privacy-policy" style="color: white; text-decoration: underline; opacity: 1;">Privacy Policy</a>
-            </p>
+                Built by <a href="/" style="color: var(--accent); text-decoration: underline;">Skylight Solar</a>
         </div>
     </div>
 </footer>
@@ -395,14 +389,6 @@
     <div id="sticky-cta">
         <a href="https://wa.me/919645800037" class="btn btn-whatsapp" style="flex: 1; min-width: auto;">WhatsApp</a>
         <a href="tel:+919526303095" class="btn btn-primary" style="flex: 1; min-width: auto;">Call Expert</a>
-    </div>
-
-    <div id="consent-banner">
-        <p>We use local analytics to optimize your experience. Do you agree to our privacy policy?</p>
-        <div style="display: flex; gap: 10px; margin-top: 15px;">
-            <button class="btn btn-primary" id="accept-consent" style="padding: 10px 20px; font-size: 0.9rem;">I Agree</button>
-            <button class="btn" id="decline-consent" style="padding: 10px 20px; font-size: 0.9rem; background: #eee;">No</button>
-        </div>
     </div>
 
     <script>
@@ -442,22 +428,6 @@
             document.getElementById('quiz-progress-fill').style.width = '100%';
         }
 
-        // Consent & Pixel
-        const banner = document.getElementById('consent-banner');
-        if (!localStorage.getItem('skylight_consent')) {
-            banner.style.display = 'block';
-        } else {
-            window._skylightConsent = true;
-        }
-
-        document.getElementById('accept-consent').onclick = () => {
-            localStorage.setItem('skylight_consent', '1');
-            window._skylightConsent = true;
-            banner.style.display = 'none';
-            trackEvent('Consent Granted', 'SKY-9645');
-        };
-        document.getElementById('decline-consent').onclick = () => banner.style.display = 'none';
-
         // Visibility Logic
         window.onscroll = () => {
             const sticky = document.getElementById('sticky-cta');
@@ -465,10 +435,8 @@
             else sticky.style.display = 'none';
         };
 
-        // Skylight Pixel Mock
-        window._skylightConsent = false;
+        // Tracking Logic (Always On for Demo)
         window.trackEvent = function(action, id) {
-            if (!window._skylightConsent) return;
             console.log('Skylight Pixel:', action, id);
         };
         
