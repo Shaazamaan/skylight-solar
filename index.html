@@ -1,6 +1,6 @@
 <!--
   ╔══════════════════════════════════════════════════╗
-  ║    DEVBRIDGE KERALA | BUILD MANIFEST v14.1       ║
+  ║    SKYLIGHT SOLAR   | BUILD MANIFEST v14.1       ║
   ╠══════════════════════════════════════════════════╣
   ║  Business      : Skylight Solar & Water Purifier ║
   ║  City          : Kottakkal                        ║
@@ -10,7 +10,7 @@
   ║  Goal          : Both                            ║
   ║  WhatsApp      : 9645800037                      ║
   ║  Phone         : 9526303095                      ║
-  ║  Admin Email   : suhair4546@gmail.com            ║
+  ║  Admin Email   : info@skylightsolar.com          ║
   ╠══════════════════════════════════════════════════╣
   ║  COMPLIANCE LOCKS                                ║
   ║  Lock 1 – 24h Guarantee   : YES                  ║
@@ -28,7 +28,7 @@
   ║  Testi 3   : placeholder + initial-avatar       ║
   ║  Map Embed : active: Kottakkal, Malappuram       ║
   ╠══════════════════════════════════════════════════╣
-  ║  DVK PIXEL     : ACTIVE — SKY-9645               ║
+  ║  SKYLIGHT PIXEL : ACTIVE — SKY-9645               ║
   ║  CONSENT GATE  : ALL events gated on consent     ║
   ║  EXIT TRACKING : pagehide + sendBeacon           ║
   ║  UNLOAD EVENT  : NOT USED (Chrome deprecating    ║
@@ -351,8 +351,8 @@
             <h2 style="color: white; margin-bottom: 20px;">Ready for a Smart Upgrade?</h2>
             <p style="margin-bottom: 40px; opacity: 0.9; font-size: 1.2rem;">Book a free home water test or a solar consultation today.</p>
             <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
-                <a href="https://wa.me/919645800037" class="btn btn-whatsapp" onclick="logDvkEvent('CTA WhatsApp', 'SKY-9645')">Message Suhair on WhatsApp</a>
-                <a href="tel:+919526303095" class="btn" style="background: white; color: var(--primary);" onclick="logDvkEvent('CTA Call', 'SKY-9645')">Call Senior Expert</a>
+                <a href="https://wa.me/919645800037" class="btn btn-whatsapp" onclick="trackEvent('CTA WhatsApp', 'SKY-9645')">Message our Expert on WhatsApp</a>
+                <a href="tel:+919526303095" class="btn" style="background: white; color: var(--primary);" onclick="trackEvent('CTA Call', 'SKY-9645')">Call Senior Expert</a>
             </div>
             <p style="margin-top: 30px; font-size: 0.9rem;">Expert technician available in Kottakkal district | Response within 1 hour</p>
         </div>
@@ -384,7 +384,7 @@
         <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; text-align: center; color: white; font-size: 0.95rem;">
             <p style="opacity: 0.9;">&copy; 2026 Skylight Solar & Water Purifier. All rights reserved.</p>
             <p style="margin-top: 15px; font-weight: 600;">
-                Built by <a href="https://devbridgekerala.com" style="color: var(--accent); text-decoration: underline;">DevBridge Kerala</a> 
+                Built by <a href="/" style="color: var(--accent); text-decoration: underline;">Skylight Solar</a> 
                 <span style="margin: 0 10px; opacity: 0.3;">|</span> 
                 <a href="/privacy-policy" style="color: white; text-decoration: underline; opacity: 1;">Privacy Policy</a>
             </p>
@@ -444,17 +444,17 @@
 
         // Consent & Pixel
         const banner = document.getElementById('consent-banner');
-        if (!localStorage.getItem('dvk_consent')) {
+        if (!localStorage.getItem('skylight_consent')) {
             banner.style.display = 'block';
         } else {
-            window._dvkConsent = true;
+            window._skylightConsent = true;
         }
 
         document.getElementById('accept-consent').onclick = () => {
-            localStorage.setItem('dvk_consent', '1');
-            window._dvkConsent = true;
+            localStorage.setItem('skylight_consent', '1');
+            window._skylightConsent = true;
             banner.style.display = 'none';
-            logDvkEvent('Consent Granted', 'SKY-9645');
+            trackEvent('Consent Granted', 'SKY-9645');
         };
         document.getElementById('decline-consent').onclick = () => banner.style.display = 'none';
 
@@ -465,11 +465,11 @@
             else sticky.style.display = 'none';
         };
 
-        // DVK Pixel Mock
-        window._dvkConsent = false;
-        window.logDvkEvent = function(action, id) {
-            if (!window._dvkConsent) return;
-            console.log('DVK Pixel:', action, id);
+        // Skylight Pixel Mock
+        window._skylightConsent = false;
+        window.trackEvent = function(action, id) {
+            if (!window._skylightConsent) return;
+            console.log('Skylight Pixel:', action, id);
         };
         
         // Initial calc
