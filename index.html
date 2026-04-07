@@ -163,7 +163,23 @@
         .avatar { width: 64px; height: 64px; border-radius: 50%; background: var(--accent); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; margin-bottom: 20px; }
 
         /* Sticky CTA */
-        #sticky-cta { position: fixed; bottom: 0; width: 100%; padding: 15px 5%; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); z-index: 1000; display: none; align-items: center; justify-content: center; gap: 20px; box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.1); }
+        #sticky-cta { position: fixed; bottom: 0; width: 100%; padding: 15px 5%; background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(10px); z-index: 1000; display: none; align-items: center; justify-content: center; gap: 15px; box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.15); border-top: 1px solid rgba(0,0,0,0.05); }
+
+        /* ROI Chart */
+        .roi-viz { grid-column: span 2; margin-top: 30px; background: rgba(59, 130, 246, 0.05); padding: 30px; border-radius: 16px; border: 1px dashed var(--accent); }
+        .roi-track { height: 12px; background: #E2E8F0; border-radius: 50px; overflow: hidden; margin-top: 15px; position: relative; }
+        .roi-bar { height: 100%; background: linear-gradient(90deg, var(--accent), #60A5FA); width: 0%; transition: width 1s var(--transition); }
+        .roi-break-even { position: absolute; left: 16%; top: -20px; font-size: 0.75rem; color: var(--accent); font-weight: 700; transform: translateX(-50%); }
+
+        /* Quiz Progress */
+        .quiz-progress { height: 6px; background: #E2E8F0; width: 100%; border-radius: 3px; margin-bottom: 40px; }
+        .quiz-progress-fill { height: 100%; background: var(--accent); width: 33%; transition: width 0.3s ease; border-radius: 3px; }
+
+        /* Logo */
+        .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo-svg { width: 40px; height: 40px; fill: var(--accent); }
+        .logo-text { font-size: 1.5rem; font-weight: 800; color: white; letter-spacing: -1px; }
+        .footer .logo-text { color: var(--primary); }
 
         /* Animations */
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
@@ -174,6 +190,8 @@
             .calc-result { grid-template-columns: 1fr; }
             #sticky-cta { display: flex; }
             section { padding: 60px 0; }
+            .footer { padding-bottom: 120px !important; }
+            .calc-result { grid-template-columns: 1fr 1fr; }
         }
 
         /* Consent Banner */
@@ -185,8 +203,11 @@
 
     <header style="position: absolute; width: 100%; z-index: 100; padding: 30px 5%;">
         <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
-            <div style="font-size: 1.5rem; font-weight: 800; color: white; letter-spacing: -1px;">SKYLIGHT</div>
-            <a href="tel:+919526303095" class="btn btn-primary" style="padding: 12px 24px; font-size: 0.9rem;">Urgent Service: 9526 3030 95</a>
+            <a href="/" class="logo">
+                <svg class="logo-svg" viewBox="0 0 100 100"><path d="M50 10L90 30V70L50 90L10 70V30L50 10Z" fill="none" stroke="currentColor" stroke-width="8"/><circle cx="50" cy="50" r="20"/></svg>
+                <span class="logo-text">SKYLIGHT</span>
+            </a>
+            <a href="tel:+919526303095" class="btn btn-primary" style="padding: 12px 24px; font-size: 0.9rem; font-family: 'Inter';">Urgent: 9526 3030 95</a>
         </div>
     </header>
 
@@ -233,6 +254,16 @@
                         <p id="calc-roi">₹8.1 Lakhs</p>
                     </div>
                 </div>
+                <div class="roi-viz">
+                    <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 700;">
+                        <span>Your Investment Period</span>
+                        <span id="roi-percent">Return: 12x</span>
+                    </div>
+                    <div class="roi-track">
+                        <div class="roi-break-even">Break-Even</div>
+                        <div class="roi-bar" id="roi-bar"></div>
+                    </div>
+                </div>
             </div>
             <p style="text-align: center; margin-top: 40px; font-size: 0.9rem; color: var(--text-muted);">*Estimates based on current solar subsidy rates in Kerala.</p>
         </div>
@@ -259,6 +290,7 @@
             <p style="color: var(--text-muted); margin-top: 10px;">Find the perfect Canix purifier in 30 seconds.</p>
             
             <div class="quiz-container">
+                <div class="quiz-progress"><div class="quiz-progress-fill" id="quiz-progress-fill"></div></div>
                 <div id="step-1" class="quiz-step active">
                     <h3>Step 1: What is your water source?</h3>
                     <div class="quiz-options">
@@ -326,24 +358,39 @@
         </div>
     </section>
 
-    <footer style="padding: 80px 0; background: var(--primary); color: white;">
-        <div class="container">
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 60px;">
-                <div>
-                    <div style="font-size: 1.5rem; font-weight: 800; margin-bottom: 20px;">SKYLIGHT</div>
-                    <p style="opacity: 0.7;">Sustainable solar and water purification solutions for a cleaner, greener Kerala.</p>
-                </div>
-                <div>
-                    <h4>Contact Us</h4>
-                    <p style="opacity: 0.7; margin-top: 15px;">Kolatuparamba, Kottakkal<br>Malappuram, Kerala<br>9645 8000 37</p>
+<footer class="footer" style="padding: 80px 0 120px; background: var(--primary); color: white;">
+    <div class="container">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 60px;">
+            <div>
+                <a href="/" class="logo" style="margin-bottom: 20px;">
+                    <svg class="logo-svg" style="fill: var(--accent);" viewBox="0 0 100 100"><path d="M50 10L90 30V70L50 90L10 70V30L50 10Z" fill="none" stroke="currentColor" stroke-width="8"/><circle cx="50" cy="50" r="20"/></svg>
+                    <span class="logo-text" style="color: white;">SKYLIGHT</span>
+                </a>
+                <p style="opacity: 0.7;">Sustainable solar and water purification solutions for a cleaner, greener Kerala.</p>
+            </div>
+            <div>
+                <h4 style="color: white;">Quick Links</h4>
+                <div style="display: grid; gap: 10px; margin-top: 15px;">
+                    <a href="#calculator" style="color: white; opacity: 0.7; text-decoration: none;">Solar Calculator</a>
+                    <a href="#water-quiz" style="color: white; opacity: 0.7; text-decoration: none;">Water Doctor Quiz</a>
+                    <a href="#trust" style="color: white; opacity: 0.7; text-decoration: none;">Our Standards</a>
                 </div>
             </div>
-            <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; text-align: center; opacity: 0.7; font-size: 0.9rem;">
-                <p>&copy; 2026 Skylight Solar & Water Purifier. All rights reserved.</p>
-                <p style="margin-top: 10px;">Built by <a href="https://devbridgekerala.com" style="color: white;">DevBridge Kerala</a> | <a href="/privacy-policy" style="color: white;">Privacy Policy</a></p>
+            <div>
+                <h4 style="color: white;">Contact Us</h4>
+                <p style="opacity: 0.8; margin-top: 15px; font-weight: 500;">Kolatuparamba, Kottakkal<br>Malappuram, Kerala<br>9645 8000 37</p>
             </div>
         </div>
-    </footer>
+        <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; text-align: center; color: white; font-size: 0.95rem;">
+            <p style="opacity: 0.9;">&copy; 2026 Skylight Solar & Water Purifier. All rights reserved.</p>
+            <p style="margin-top: 12px; font-weight: 600;">
+                Built by <a href="https://devbridgekerala.com" style="color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent);">DevBridge Kerala</a> 
+                <span style="margin: 0 10px; opacity: 0.3;">|</span> 
+                <a href="/privacy-policy" style="color: white; opacity: 0.8;">Privacy Policy</a>
+            </p>
+        </div>
+    </div>
+</footer>
 
     <div id="sticky-cta">
         <a href="https://wa.me/919645800037" class="btn btn-whatsapp" style="flex: 1; min-width: auto;">WhatsApp</a>
@@ -371,6 +418,12 @@
             document.getElementById('calc-savings').innerText = '₹' + savings.toLocaleString();
             document.getElementById('calc-payback').innerText = payback + ' Years';
             document.getElementById('calc-roi').innerText = '₹' + roi + ' Lakhs';
+            
+            // Visual ROI update
+            const bar = document.getElementById('roi-bar');
+            const percent = Math.min((roi / 10) * 100, 100);
+            bar.style.width = percent + '%';
+            document.getElementById('roi-percent').innerText = 'Return: ' + (roi/(bill/1000)).toFixed(1) + 'x Investment';
         }
 
         // Water Quiz Logic
@@ -379,12 +432,14 @@
             quizData['step' + (step-1)] = val;
             document.querySelector('.quiz-step.active').classList.remove('active');
             document.getElementById('step-' + step).classList.add('active');
+            document.getElementById('quiz-progress-fill').style.width = (step * 33) + '%';
         }
         function showResult(model) {
             document.querySelector('.quiz-step.active').classList.remove('active');
             document.getElementById('quiz-result').classList.add('active');
             document.getElementById('result-title').innerText = 'Recommended: ' + model;
             document.getElementById('quiz-wa').href += encodeURIComponent(model);
+            document.getElementById('quiz-progress-fill').style.width = '100%';
         }
 
         // Consent & Pixel
