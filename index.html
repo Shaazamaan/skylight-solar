@@ -1,6 +1,6 @@
 <!--
   ╔══════════════════════════════════════════════════╗
-  ║    SKYLIGHT SOLAR   | BUILD MANIFEST v14.1       ║
+  ║    SKYLIGHT SOLAR   | BUILD MANIFEST v14.2 Final ║
   ╠══════════════════════════════════════════════════╣
   ║  Business      : Skylight Solar & Water Purifier ║
   ║  City          : Kottakkal                        ║
@@ -185,21 +185,24 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
         @media (max-width: 768px) {
-            #calculator { padding: 20px; margin-top: -50px; }
-            .calc-grid, .arc-grid { grid-template-columns: 1fr; }
-            .calc-result { grid-template-columns: 1fr !important; gap: 15px; }
-            .result-box h4 { font-size: 0.8rem; }
-            .result-box p { font-size: 1.4rem; }
-            #sticky-cta { display: flex; }
-            section { padding: 60px 0; }
+            #calculator { padding: 20px !important; margin-top: -50px !important; }
+            .calc-grid, .arc-grid { grid-template-columns: 1fr !important; gap: 30px !important; }
+            .calc-result { grid-template-columns: 1fr !important; gap: 15px !important; padding: 20px !important; }
+            .result-box h4 { font-size: 0.8rem !important; }
+            .result-box p { font-size: 1.4rem !important; }
+            #sticky-cta { display: flex !important; }
+            section { padding: 60px 0 !important; }
             .footer { padding-bottom: 240px !important; }
-            .roi-viz { padding: 20px; }
+            .roi-viz { padding: 15px !important; grid-column: span 1 !important; }
         }
 
         @media (max-width: 480px) {
-            .logo-text { font-size: 1.2rem; }
-            .header-btn span { display: none; }
-            header { padding: 20px 5% !important; }
+            .logo-text { font-size: 1.1rem !important; }
+            .logo-svg { width: 30px !important; height: 30px !important; }
+            .header-btn { padding: 8px 12px !important; font-size: 0.8rem !important; }
+            .header-btn span { display: none !important; }
+            header { padding: 15px 5% !important; }
+            h1 { font-size: 2.2rem !important; }
         }
 
     </style>
