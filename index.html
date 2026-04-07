@@ -314,9 +314,9 @@
                 <div id="step-1" class="quiz-step active">
                     <h3>Step 1: What is your water source?</h3>
                     <div class="quiz-options">
-                        <div class="quiz-option" onclick="nextStep(2, 'Well')">Open Well</div>
-                        <div class="quiz-option" onclick="nextStep(2, 'Borewell')">Borewell</div>
-                        <div class="quiz-option" onclick="nextStep(2, 'KWA')">KWA / Municipality</div>
+                        <div class="quiz-option" onclick="checkLead(() => nextStep(2, 'Well'))">Open Well</div>
+                        <div class="quiz-option" onclick="checkLead(() => nextStep(2, 'Borewell'))">Borewell</div>
+                        <div class="quiz-option" onclick="checkLead(() => nextStep(2, 'KWA'))">KWA / Municipality</div>
                     </div>
                 </div>
                 <div id="step-2" class="quiz-step">
